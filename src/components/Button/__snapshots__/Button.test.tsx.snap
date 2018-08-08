@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NiceCheckbox renders the checkbox with correct label 1`] = `
+<div
+  className="btn btn-primary"
+>
+  blue
+   = Home
+</div>
+`;
+
+exports[`NiceCheckbox renders the checkbox with correct label 2`] = `
+<div
+  className="btn btn-primary"
+>
+   = Home
+</div>
+`;

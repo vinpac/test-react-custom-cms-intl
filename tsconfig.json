@@ -1,0 +1,30 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "preserve",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": false,
+    "strictNullChecks": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "baseUrl": "./src",
+    "paths": {
+      "~/components/*": ["components/*"],
+      "~/lib/*": ["lib/*"],
+      "~/redux/*": ["redux/*"],
+      "~/core/*": ["core/*"],
+      "~/types/*": ["types/*"],
+      "~/content/*": ["content/*"]
+    },
+    "typeRoots": ["./src/@types", "./node_modules/@types"],
+    "lib": ["dom", "es2015", "es2016"]
+  },
+  "exclude": ["node_modules", "src/.next"]
+}

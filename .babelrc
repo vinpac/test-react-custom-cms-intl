@@ -1,0 +1,61 @@
+{
+  "env": {
+    "development": {
+      "presets": ["next/babel", "@zeit/next-typescript/babel"],
+      "plugins": [
+        [
+          "styled-components",
+          {
+            "ssr": true,
+            "displayName": true,
+            "preprocess": false
+          }
+        ],
+        "react-intl"
+      ]
+    },
+    "production": {
+      "presets": ["next/babel", "@zeit/next-typescript/babel"],
+      "plugins": [
+        [
+          "styled-components",
+          {
+            "ssr": true,
+            "displayName": true,
+            "preprocess": false
+          }
+        ],
+        [
+          "react-intl",
+          {
+            "messagesDir": "src/content/messages/.defaults/"
+          }
+        ]
+      ]
+    },
+    "test": {
+      "presets": [
+        [
+          "next/babel",
+          {
+            "preset-env": {
+              "modules": "commonjs"
+            }
+          }
+        ],
+        "@zeit/next-typescript/babel"
+      ],
+      "plugins": [
+        [
+          "styled-components",
+          {
+            "ssr": true,
+            "displayName": true,
+            "preprocess": false
+          },
+          "react-intl"
+        ]
+      ]
+    }
+  }
+}

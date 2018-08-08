@@ -1,0 +1,84 @@
+body {
+  margin: 32px !important;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, 'sans-serif';
+  font-size: 14px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+a {
+  color: #008489;
+  font-weight: bold;
+}
+
+pre[class^='css-'] {
+  font-size: 16px !important;
+  padding: 15px 5px;
+}
+
+button[class^='css-'] {
+  font-size: 14px !important;
+  height: 28px;
+  padding-bottom: 10px;
+}
+
+button[class^='css-'] > div > div {
+  margin-bottom: 0 !important;
+}
+
+table[class^='css-'] {
+  width: 100%;
+}
+
+table[class^='css-'] thead {
+  background: #f9f9f9;
+}
+
+table[class^='css-'] thead tr th {
+  font-weight: bold;
+}
+
+table[class^='css-'] tbody tr td:last-child {
+  font-weight: normal;
+}
+
+table[class^='css-'] td,
+table[class^='css-'] th {
+  font-family: Roboto, sans-serif !important;
+  font-size: 16px !important;
+}
+
+table[class^='css-'] td {
+  font-weight: normal;
+}
+
+#root > div:first-child > div:nth-child(3) > div > div:first-child > div {
+  font-family: Roboto, Helvetica, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: normal !important;
+}
+
+#root
+  > div:first-child
+  > div:nth-child(3)
+  > div
+  > div:first-child
+  > div
+  > code {
+  padding: 2.7px 5.4px;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
+    monospace;
+  color: #d73a49;
+  font-weight: bold;
+  background: #ffeaed;
+  font-size: 14px;
+  border-radius: 4px;
+}
