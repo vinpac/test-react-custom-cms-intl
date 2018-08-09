@@ -21,7 +21,7 @@
       "~/redux/*": ["redux/*"],
       "~/core/*": ["core/*"],
       "~/types/*": ["types/*"],
-      "~/content/*": ["content/*"]
+      "~/channel/*": ["channel/*"]
     },
     "typeRoots": ["./src/types", "./node_modules/@types"],
     "lib": ["dom", "es2015", "es2016"]

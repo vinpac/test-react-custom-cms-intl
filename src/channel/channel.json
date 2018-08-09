@@ -3,7 +3,5 @@
     "colorPrimary": "#0076c4",
     "colorAccent": "#0eb261"
   },
-  "assets": {
-    "toolbarBrand": "/logo.svg"
-  }
+  "assets": {}
 }

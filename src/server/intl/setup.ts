@@ -15,8 +15,8 @@ interface IntlMessages {
   [messageId: string]: string
 }
 
-// Get the supported languages by looking for translations in the `content/messages/` dir.
-const messagesFilesPath = resolve('src/content/messages/*/index.yaml')
+// Get the supported languages by looking for translations in the `lang/` dir.
+const messagesFilesPath = resolve('src/lang/*/index.yaml')
 const languages: string[] = glob
   .sync(messagesFilesPath)
   .map(filepath => basename(dirname(filepath)))
@@ -41,8 +41,8 @@ const getLocaleDataScript = (locale: string) => {
 }
 
 // We need to load and expose the translations on the request for the user's
-// locale. This will load every yaml file under `src/content/messages/{locale}` and
-// `src/content/messages/.defaults`.
+// locale. This will load every yaml file under `src/lang/{locale}` and
+// `src/lang/.defaults`.
 // In production it will only load a locale's messages once.
 const messagesCache = new Map<string, IntlMessages>()
 let definedMessages: object | undefined
@@ -51,7 +51,7 @@ const getMessages = (locale: string): IntlMessages => {
     return messagesCache.get(locale)!
   }
 
-  const localeDir = `src/content/messages/${locale}`
+  const localeDir = `src/lang/${locale}`
   const messages: IntlMessages = {}
 
   // Include definedMessages
@@ -60,14 +60,12 @@ const getMessages = (locale: string): IntlMessages => {
       Object.assign(messages, definedMessages)
     } else {
       definedMessages = {}
-      glob
-        .sync(resolve('src/content/messages/.defaults/**/*.yaml'))
-        .forEach(filepath => {
-          // @ts-ignore
-          __non_webpack_require__(filepath, 'utf8').forEach(message => {
-            definedMessages![message.id] = message.defaultMessage
-          })
+      glob.sync(resolve('src/lang/.defaults/**/*.yaml')).forEach(filepath => {
+        // @ts-ignore
+        __non_webpack_require__(filepath, 'utf8').forEach(message => {
+          definedMessages![message.id] = message.defaultMessage
         })
+      })
 
       Object.assign(messages, definedMessages)
     }

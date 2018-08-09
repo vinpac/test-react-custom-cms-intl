@@ -6,4 +6,4 @@ src/.next
 coverage
 .coverage
 storybook-static
-src/content/messages/.defaults
+src/lang/.defaults

@@ -13,7 +13,7 @@ function getChannel(): Channel {
     return cachedChannel
   }
 
-  const channelConfigPath = resolve('src/content/channel.json')
+  const channelConfigPath = resolve('src/channel/channel.json')
   // @ts-ignore
   delete __non_webpack_require__.cache[channelConfigPath]
   // @ts-ignore

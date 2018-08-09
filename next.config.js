@@ -36,7 +36,7 @@ module.exports = withTypescript({
     assign(config, {
       resolve: assign(config.resolve, {
         alias: assign({}, config.resolve.alias, {
-          '~/content': resolve('content'),
+          '~/channel': resolve('channel'),
           '~/components': resolve('components'),
           '~/lib': resolve('lib'),
           '~/core': resolve('core'),
