@@ -4,6 +4,7 @@ import * as express from 'express'
 import * as next from 'next'
 import * as bodyParser from 'body-parser'
 import { dev, STATIC_DIST_DIRNAME } from '~/core/constants'
+import setupChannel from './channel/setup'
 import setupIntl from './intl/setup'
 
 const port = process.env.PORT || 3000
@@ -26,6 +27,7 @@ server.use(
   ),
 )
 server.use(express.static(resolve('public')))
+setupChannel(server)
 setupIntl(server)
 
 const listen = () =>

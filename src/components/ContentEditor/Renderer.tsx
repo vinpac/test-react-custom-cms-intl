@@ -2,15 +2,17 @@ import * as React from 'react'
 import {
   RendereableCMSDocument,
   Schema,
-  WeakLayerNode,
+  WeakLayerNodeType,
 } from '~/components/ContentEditor/types'
 
-interface RenderLayerProps {
-  schema: Schema
-  node: WeakLayerNode
-}
+const renderLayer = (
+  node: WeakLayerNodeType,
+  schema: Schema,
+): React.ReactElement<any> | null | string => {
+  if (typeof node === 'string') {
+    return node
+  }
 
-const RenderLayer: React.SFC<RenderLayerProps> = ({ schema, node }) => {
   if (node.disabled) {
     return null
   }
@@ -18,6 +20,14 @@ const RenderLayer: React.SFC<RenderLayerProps> = ({ schema, node }) => {
   const Component = schema.plainTypes.includes(node.kind)
     ? node.kind
     : schema.types[node.kind]
+
+  if (!Component) {
+    throw new Error(
+      `'${
+        node.kind
+      }' is not a valid component type or plain type. Failed to render document.`,
+    )
+  }
 
   let props: object = node.props || {}
 
@@ -31,18 +41,16 @@ const RenderLayer: React.SFC<RenderLayerProps> = ({ schema, node }) => {
         throw new Error(
           `'${
             modifier.kind
-          }' is not a valid modifier. You may have forgotten to include it in the schema.`,
+          }' is not a valid modifier. You may have forgotten to include it in the schema. Failed to render document.`,
         )
       }
     })
   }
 
   return (
-    <Component {...props}>
+    <Component key={node.id} {...props}>
       {node.nodes &&
-        node.nodes.map((childNode, i) => (
-          <RenderLayer key={i} node={childNode} schema={schema} />
-        ))}
+        node.nodes.map(childNode => renderLayer(childNode, schema))}
     </Component>
   )
 }
@@ -56,13 +64,7 @@ const Renderer: React.SFC<RendererProps> = ({
   document: { nodes },
   schema,
 }) => {
-  return (
-    <>
-      {nodes.map(node => (
-        <RenderLayer key={node.id} schema={schema} node={node} />
-      ))}
-    </>
-  )
+  return <>{nodes.map(node => renderLayer(node, schema))}</>
 }
 
 export default Renderer

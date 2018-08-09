@@ -1,2 +1,4 @@
 app:
-  name: Hello world 12312
+  name: Atados
+searchForm:
+  placeholder: 'Buscar vagas de voluntariado por causa, habilidade, endereço…'

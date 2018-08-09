@@ -17,6 +17,8 @@ export interface WeakLayerNode {
   nodes?: WeakLayerNode[]
 }
 
+export type WeakLayerNodeType = WeakLayerNode | string
+
 export interface LayerNode extends WeakLayerNode {
   id: string
   type: React.ComponentType<any>
@@ -54,12 +56,22 @@ export interface ComponentSchema {
   [propName: string]: ComponentProperty
 }
 
+export interface EditableComponent<Props> extends React.ComponentClass<Props> {
+  schema?: ComponentSchema
+  layerIcon?: string
+  layerFocusedIcon?: string
+}
+
 export interface StatelessEditableComponent<Props>
   extends React.StatelessComponent<Props> {
   schema?: ComponentSchema
   layerIcon?: string
   layerFocusedIcon?: string
 }
+
+export type EditableComponentType<Props> =
+  | EditableComponent<Props>
+  | StatelessEditableComponent<Props>
 
 interface StatelessInputComponentContext {
   values: {
@@ -83,7 +95,7 @@ export interface Schema {
   plainTypes: string[]
   modifiers?: { [kind: string]: Modifier<any> }
   inputs?: { [kind: string]: StatelessInputComponent<any> }
-  types: { [kind: string]: StatelessEditableComponent<any> }
+  types: { [kind: string]: EditableComponentType<any> }
 }
 
 export type ModifierContext = {

@@ -23,7 +23,7 @@
       "~/types/*": ["types/*"],
       "~/content/*": ["content/*"]
     },
-    "typeRoots": ["./src/@types", "./node_modules/@types"],
+    "typeRoots": ["./src/types", "./node_modules/@types"],
     "lib": ["dom", "es2015", "es2016"]
   },
   "exclude": ["node_modules", "src/.next"]

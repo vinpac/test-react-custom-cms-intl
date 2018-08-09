@@ -3,8 +3,11 @@ import React from 'react'
 import { Store } from 'redux'
 import { Provider } from 'react-redux'
 import { IntlProvider, addLocaleData } from 'react-intl'
+import { ThemeProvider } from 'styled-components'
 import withRedux from '~/redux/with-redux'
 import { RootState } from '~/redux/root-reducer'
+import { GlobalModals } from '~/components/Modal'
+import globalModals from '~/components/Modal/global-modals'
 
 declare global {
   interface Window {
@@ -24,35 +27,26 @@ if (typeof window !== 'undefined' && window.ReactIntlLocaleData) {
 
 interface AppProps extends AppComponentProps {
   readonly store: Store
-  readonly locale: string
-  readonly messages: { [messageId: string]: object }
 }
 
 class App extends NextApp<AppProps> {
-  static async getInitialProps({ Component, ctx }) {
-    let pageProps = {}
-
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx)
-    }
-
-    // Get the `locale` and `messages` from the request object on the server.
-    // In the browser, use the same values that the server serialized.
-    const { req } = ctx
-    const { locale, messages } = req || window.__NEXT_DATA__.props.pageProps
-
-    return { pageProps, locale, messages }
-  }
-
   render() {
-    const { Component, store, pageProps, locale, messages } = this.props
+    const { Component, store, pageProps } = this.props
+    const {
+      channel,
+      intl: { locale, messages },
+    } = store.getState()
     const now = Date.now()
 
     return (
       <Container>
         <IntlProvider locale={locale} messages={messages} initialNow={now}>
           <Provider store={store}>
-            <Component {...pageProps} />
+            <ThemeProvider theme={{ colorPrimary: channel.theme.colorPrimary }}>
+              <GlobalModals modals={globalModals}>
+                <Component {...pageProps} />
+              </GlobalModals>
+            </ThemeProvider>
           </Provider>
         </IntlProvider>
       </Container>

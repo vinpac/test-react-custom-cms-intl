@@ -1,14 +1,12 @@
 import { createStore, applyMiddleware, compose, Middleware } from 'redux'
-import withRedux from 'next-redux-wrapper'
+import withRedux, { StoreCreatorOptions } from 'next-redux-wrapper'
 import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import { dev } from '~/core/constants'
 import rootReducer from '~/redux/root-reducer'
-import {
-  MapStateToProps,
-  MapDispatchToProps,
-  MergeProps,
-} from '../../node_modules/@types/react-redux'
+import { MapStateToProps, MapDispatchToProps, MergeProps } from 'react-redux'
+import { Channel } from '~/types/channel'
+import { IncomingMessage } from 'http'
 
 declare global {
   interface Window {
@@ -16,7 +14,26 @@ declare global {
   }
 }
 
-const configureStore = (initialState?: object) => {
+interface MyStoreCreatorOptions
+  extends StoreCreatorOptions<any, any, any, any, any> {
+  req: IncomingMessage & { channel: Channel } & {
+    locale: string
+    messages: { [messageId: string]: string }
+  }
+}
+
+const configureStore = (baseState: object, context: MyStoreCreatorOptions) => {
+  let initialState = baseState
+  if (context && context.isServer) {
+    initialState = {
+      channel: context.req.channel,
+      intl: {
+        locale: context.req.locale,
+        messages: context.req.messages,
+      },
+    }
+  }
+
   const middleware: Middleware[] = [thunk]
 
   let enhancer

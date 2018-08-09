@@ -24,6 +24,7 @@ export interface CarouselContextType {
 }
 
 export interface CarouselProps {
+  readonly style?: React.CSSProperties
   readonly transitionTime?: number
   readonly rotateEach?: number
   readonly className?: string
@@ -188,7 +189,7 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
 
   render() {
     const { setCurrentItemId } = this
-    const { className, children, transitionTime } = this.props
+    const { className, style, children, transitionTime } = this.props
     const {
       direction,
       slides,
@@ -209,7 +210,9 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
           transitionTime,
         }}
       >
-        <Wrapper className={className}>{children}</Wrapper>
+        <Wrapper className={className} style={style}>
+          {children}
+        </Wrapper>
       </CarouselContext.Provider>
     )
   }

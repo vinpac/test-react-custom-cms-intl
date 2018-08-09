@@ -92,13 +92,19 @@ export interface CarouselItemProps {
   readonly id: string
   readonly className?: string
   readonly children?: React.ReactNode
+  readonly style?: React.CSSProperties
 }
 
 export interface CarouselItemType extends React.SFC<CarouselItemProps> {
   isCarouselItem?: true
 }
 
-const CarouselItemWrapper: CarouselItemType = ({ id, children, className }) => (
+const CarouselItemWrapper: CarouselItemType = ({
+  id,
+  style,
+  children,
+  className,
+}) => (
   <CarouselContext.Consumer>
     {({ transitionTime, delaying, currentItemId, prevItemId, direction }) => (
       <Slide
@@ -109,6 +115,7 @@ const CarouselItemWrapper: CarouselItemType = ({ id, children, className }) => (
         direction={direction}
         delaying={delaying}
         transitionTime={transitionTime}
+        style={style}
       >
         <SlideInner>{children}</SlideInner>
       </Slide>
