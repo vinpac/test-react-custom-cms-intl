@@ -41,6 +41,10 @@ export default class Document extends NextDocument {
             href={`/_static/${STATIC_DIST_DIRNAME}/_index.css`}
           />
           <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+          />
+          <link
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700"
             rel="stylesheet"
           />

@@ -1,5 +1,7 @@
-export { default as Carousel } from './Carousel'
-export { default as CarouselItem } from './CarouselItem'
-export { default as CarouselIndicators } from './CarouselIndicators'
-export { CarouselProps } from './Carousel'
-export { CarouselItemProps } from './CarouselItem'
+export { default as Carousel } from '~/components/Carousel/Carousel'
+export { default as CarouselItem } from '~/components/Carousel/CarouselItem'
+export {
+  default as CarouselIndicators,
+} from '~/components/Carousel/CarouselIndicators'
+export { CarouselProps } from '~/components/Carousel/Carousel'
+export { CarouselItemProps } from '~/components/Carousel/CarouselItem'

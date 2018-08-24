@@ -40,6 +40,40 @@ const getLocaleDataScript = (locale: string) => {
   return localeDataCache.get(lang)
 }
 
+function readDirMessages(path: string): IntlMessages {
+  const messages: IntlMessages = {}
+  glob.sync(`${path}/**/*.yaml`).forEach(filepath => {
+    const relpath = relative(path, filepath)
+    const json = flatten(yaml.safeLoad(readFileSync(filepath, 'utf8')))
+
+    if (relpath === 'index.yaml') {
+      Object.assign(messages, json)
+      return
+    }
+
+    if (relpath.endsWith('/index.yaml')) {
+      Object.assign(
+        messages,
+        flatten({
+          [basename(dirname(relpath).replace(/\//g, '.'), '.yaml')]: flatten(
+            json,
+          ),
+        }),
+      )
+      return
+    }
+
+    Object.assign(
+      messages,
+      flatten({
+        [basename(relpath.replace(/\//g, '.'), '.yaml')]: flatten(json),
+      }),
+    )
+  })
+
+  return messages
+}
+
 // We need to load and expose the translations on the request for the user's
 // locale. This will load every yaml file under `src/lang/{locale}` and
 // `src/lang/.defaults`.
@@ -71,34 +105,11 @@ const getMessages = (locale: string): IntlMessages => {
     }
   }
 
-  glob.sync(resolve(`${localeDir}/**/*.yaml`)).forEach(filepath => {
-    const relpath = relative(localeDir, filepath)
-    const json = flatten(yaml.safeLoad(readFileSync(filepath, 'utf8')))
-
-    if (relpath === 'index.yaml') {
-      Object.assign(messages, json)
-      return
-    }
-
-    if (relpath.endsWith('/index.yaml')) {
-      Object.assign(
-        messages,
-        flatten({
-          [basename(dirname(relpath).replace(/\//g, '.'), '.yaml')]: flatten(
-            json,
-          ),
-        }),
-      )
-      return
-    }
-
-    Object.assign(
-      messages,
-      flatten({
-        [basename(relpath.replace(/\//g, '.'), '.yaml')]: flatten(json),
-      }),
-    )
-  })
+  Object.assign(messages, readDirMessages(resolve(localeDir)))
+  Object.assign(
+    messages,
+    readDirMessages(resolve(`src/channel/lang/${locale}`)),
+  )
 
   if (!dev) {
     messagesCache.set(locale, messages)

@@ -16,7 +16,16 @@
                 "props": {
                   "href": "/vagas"
                 },
-                "nodes": ["Vagas de voluntariado"]
+                "nodes": [
+                  {
+                    "id": "qwe1",
+                    "kind": "Text",
+                    "name": "Text Vagas",
+                    "props": {
+                      "value": "Vagas de voluntariado"
+                    }
+                  }
+                ]
               },
               {
                 "id": "0q9w",
@@ -47,6 +56,76 @@
         ]
       },
       {
+        "id": "8",
+        "name": "Carousel",
+        "kind": "Carousel",
+        "props": {
+          "rotateEach": 5000,
+          "style": {
+            "height": 400
+          },
+          "defaultItemId": "1"
+        },
+        "nodes": [
+          {
+            "id": "12312",
+            "name": "Indicators",
+            "kind": "CarouselIndicators"
+          },
+          {
+            "id": "10",
+            "name": "Item 1",
+            "kind": "CarouselItem",
+            "modifiers": [
+              {
+                "kind": "Padding",
+                "value": {
+                  "length": "5"
+                }
+              }
+            ],
+            "props": {
+              "id": "1",
+              "style": {
+                "backgroundColor": "#900"
+              }
+            },
+            "nodes": [
+              {
+                "id": "15",
+                "name": "Text",
+                "kind": "Markdown",
+                "props": {
+                  "value": "# Title here\n##Lorem ipsum"
+                }
+              }
+            ]
+          },
+          {
+            "id": "qwe",
+            "name": "Item 2",
+            "kind": "CarouselItem",
+            "props": {
+              "id": "2",
+              "style": {
+                "backgroundColor": "#333",
+                "backgroundImage": "url('https://78.media.tumblr.com/463fef463aa6ece6d04e29f297e15c53/tumblr_pd7ghjfeLd1rtx80xo1_540.jpg')"
+              }
+            },
+            "nodes": [
+              {
+                "id": "151",
+                "name": "Text",
+                "kind": "Markdown",
+                "props": {
+                  "value": "Lorem ipsum"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
         "id": "6",
         "name": "Container",
         "kind": "Container",
@@ -61,79 +140,6 @@
           }
         ],
         "nodes": [
-          {
-            "id": "8",
-            "name": "Carousel",
-            "kind": "Carousel",
-            "modifiers": [
-              {
-                "kind": "Margin",
-                "value": {
-                  "bottom": "5"
-                }
-              }
-            ],
-            "props": {
-              "height": 400,
-              "defaultItemId": "1"
-            },
-            "nodes": [
-              {
-                "id": "10",
-                "name": "Item 1",
-                "kind": "CarouselItem",
-                "modifiers": [
-                  {
-                    "kind": "Padding",
-                    "value": {
-                      "length": "5"
-                    }
-                  },
-                  {
-                    "kind": "Radius",
-                    "value": "5px"
-                  },
-                  {
-                    "kind": "Background",
-                    "value": {
-                      "color": "#900"
-                    }
-                  }
-                ],
-                "props": {
-                  "id": "1"
-                },
-                "nodes": [
-                  {
-                    "id": "15",
-                    "name": "Text",
-                    "kind": "Markdown",
-                    "props": {
-                      "value": "# Title here\n##Lorem ipsum"
-                    }
-                  }
-                ]
-              },
-              {
-                "id": "qwe",
-                "name": "Item 2",
-                "kind": "CarouselItem",
-                "props": {
-                  "id": "2"
-                },
-                "nodes": [
-                  {
-                    "id": "151",
-                    "name": "Text",
-                    "kind": "Markdown",
-                    "props": {
-                      "value": "Lorem ipsum"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
           {
             "id": "114",
             "name": "Texto",

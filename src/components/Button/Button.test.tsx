@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react'
 import { create } from 'react-test-renderer'
-import Button from '.'
+import Button from '~/components/Button'
 
 describe('NiceCheckbox', () => {
   it('renders the checkbox with correct label', () => {

@@ -40,7 +40,7 @@ const { appName } = defineMessages({
 })
 
 interface ToolbarProps {
-  readonly includeSearchForm?: boolean
+  readonly searchFormEnabled?: boolean
   readonly className?: string
   readonly children?: React.ReactNode
   readonly channel: Channel
@@ -56,7 +56,7 @@ class Toolbar extends React.Component<
 > {
   static defaultProps = {
     className: undefined,
-    includeSearchForm: true,
+    searchFormEnabled: true,
   }
 
   state = { collapsed: true }
@@ -64,7 +64,7 @@ class Toolbar extends React.Component<
   toggleCollapse = () => this.setState({ collapsed: !this.state.collapsed })
 
   render() {
-    const { intl, channel, includeSearchForm, className, children } = this.props
+    const { intl, channel, searchFormEnabled, className, children } = this.props
     const { collapsed } = this.state
 
     return (
@@ -80,7 +80,7 @@ class Toolbar extends React.Component<
                 )}
               </Brand>
             </Link>
-            {includeSearchForm && <SearchForm />}
+            {searchFormEnabled && <SearchForm />}
             <div className="mr-auto" />
             {children}
             <button

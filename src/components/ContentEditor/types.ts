@@ -1,106 +1,45 @@
-export type ModifierType<Value> = {
+import Schema from '~/components/ContentEditor/models/Schema'
+
+export interface Document {
+  nodes: Layer[]
+}
+
+export type ModifierDefinition<Value> = {
   kind: string
   value: Value
 }
 
-export interface RendereableCMSDocument {
-  nodes: WeakLayerNode[]
-  schema: Schema
-}
-
-export interface WeakLayerNode {
-  id: string
-  kind: string
-  modifiers?: ModifierType<any>[]
-  disabled?: boolean
-  props?: object
-  nodes?: WeakLayerNode[]
-}
-
-export type WeakLayerNodeType = WeakLayerNode | string
-
-export interface LayerNode extends WeakLayerNode {
-  id: string
-  type: React.ComponentType<any>
-  name: string
-  kind: string
-  props: object
-  collapsed?: boolean
-  disabled?: boolean
-  nodes: LayerNode[]
-}
-
-export interface Document extends RendereableCMSDocument {
-  nodes: LayerNode[]
-  schema: Schema
-}
-
 export interface LayerNode {
   id: string
-  type: React.ComponentType<any>
+  kind: string
+  name?: string
+  modifiers?: ModifierDefinition<any>[]
+  disabled?: boolean
+  props?: { [key: string]: any }
+  nodes?: Node[]
+}
+
+export type Node = LayerNode | string
+
+export interface RenderableDocument {
+  nodes: Node[]
+}
+
+export interface Layer {
+  id: string
   name: string
   kind: string
+  modifiers: ModifierDefinition<any>[]
+  disabled: boolean
   props: object
   collapsed?: boolean
-  disabled?: boolean
-  nodes: LayerNode[]
+  nodes?: LayerType[]
 }
 
-export interface ComponentProperty {
-  label: string
-  type: string
-  [key: string]: any
-}
-
-export interface ComponentSchema {
-  [propName: string]: ComponentProperty
-}
-
-export interface EditableComponent<Props> extends React.ComponentClass<Props> {
-  schema?: ComponentSchema
-  layerIcon?: string
-  layerFocusedIcon?: string
-}
-
-export interface StatelessEditableComponent<Props>
-  extends React.StatelessComponent<Props> {
-  schema?: ComponentSchema
-  layerIcon?: string
-  layerFocusedIcon?: string
-}
-
-export type EditableComponentType<Props> =
-  | EditableComponent<Props>
-  | StatelessEditableComponent<Props>
-
-interface StatelessInputComponentContext {
-  values: {
-    [fieldName: string]: any
-  }
-  property: ComponentProperty
-  Wrapper: React.StatelessComponent<{}>
-}
-
-export interface StatelessInputComponentProps {
-  context: StatelessInputComponentContext
-  value: any
-  onBlur: () => void
-  onChange: (newValue: any) => void
-}
-
-export interface StatelessInputComponent<Props>
-  extends React.StatelessComponent<Props & StatelessInputComponentProps> {}
-
-export interface Schema {
-  plainTypes: string[]
-  modifiers?: { [kind: string]: Modifier<any> }
-  inputs?: { [kind: string]: StatelessInputComponent<any> }
-  types: { [kind: string]: EditableComponentType<any> }
-}
+export type LayerType = Layer
 
 export type ModifierContext = {
   schema: Schema
-  // Component: React.ComponentType<any>
 }
 
 export interface Modifier<Value> {
@@ -109,4 +48,60 @@ export interface Modifier<Value> {
     value: Value,
     context: ModifierContext,
   ): object
+}
+
+export interface ModifiersMap {
+  [kind: string]: Modifier<any>
+}
+
+export interface PropertyControl {
+  type: string
+  label: string
+}
+
+export interface ComponentOptions<C> {
+  name?: string
+  description?: string
+  layerIcon?: string
+  propertyControls?: C
+  layerFocusedIcon?: string
+  filterChildren?: (kind: string) => boolean
+  filterParent?: (
+    kind: string,
+    component: React.ComponentType<any> | null,
+  ) => boolean
+}
+
+export interface ComponentDefinition<C> extends ComponentOptions<C> {
+  component: React.ComponentType<any>
+}
+
+export interface ComponentsMap<C> {
+  [kind: string]: ComponentDefinition<C>
+}
+
+export interface InputComponentProps<Value> {
+  label: string
+  value: Value
+  schema: Schema
+  onChange: (newValue: Value) => void
+  onBlur: (event?: React.SyntheticEvent) => void
+}
+
+export interface InputComponent<Value, Props>
+  extends React.ComponentClass<Props & InputComponentProps<Value>> {
+  defaultValue?: Value
+}
+
+export interface StatelessInputComponent<Value, Props>
+  extends React.StatelessComponent<Props & InputComponentProps<Value>> {
+  defaultValue?: Value
+}
+
+export type InputComponentType<Value, Props> =
+  | StatelessInputComponent<Value, Props>
+  | InputComponent<Value, Props>
+
+export interface InputComponentsMap {
+  [kind: string]: InputComponentType<any, any>
 }

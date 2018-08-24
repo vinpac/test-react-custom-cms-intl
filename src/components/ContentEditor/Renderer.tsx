@@ -1,12 +1,9 @@
 import * as React from 'react'
-import {
-  RendereableCMSDocument,
-  Schema,
-  WeakLayerNodeType,
-} from '~/components/ContentEditor/types'
+import { Node, RenderableDocument } from '~/components/ContentEditor/types'
+import Schema from '~/components/ContentEditor/models/Schema'
 
 const renderLayer = (
-  node: WeakLayerNodeType,
+  node: Node,
   schema: Schema,
 ): React.ReactElement<any> | null | string => {
   if (typeof node === 'string') {
@@ -17,11 +14,18 @@ const renderLayer = (
     return null
   }
 
-  const Component = schema.plainTypes.includes(node.kind)
+  const Component:
+    | React.ComponentType<any>
+    | string
+    | undefined = schema.isValidPlainType(node.kind)
     ? node.kind
-    : schema.types[node.kind]
+    : schema.getReactComponent(node.kind)
 
   if (!Component) {
+    if (node.kind === 'Text' && node.props) {
+      return node.props.value
+    }
+
     throw new Error(
       `'${
         node.kind
@@ -32,15 +36,14 @@ const renderLayer = (
   let props: object = node.props || {}
 
   if (node.modifiers) {
-    node.modifiers.forEach(modifier => {
-      if (schema.modifiers && schema.modifiers[modifier.kind]) {
-        props = schema.modifiers![modifier.kind](props, modifier.value, {
-          schema,
-        })
+    node.modifiers.forEach(modifierDefinition => {
+      const modifier = schema.getModifier(modifierDefinition.kind)
+      if (modifier) {
+        props = modifier(props, modifierDefinition.value, { schema })
       } else {
         throw new Error(
           `'${
-            modifier.kind
+            modifierDefinition.kind
           }' is not a valid modifier. You may have forgotten to include it in the schema. Failed to render document.`,
         )
       }
@@ -56,7 +59,7 @@ const renderLayer = (
 }
 
 interface RendererProps {
-  document: RendereableCMSDocument
+  document: RenderableDocument
   schema: Schema
 }
 

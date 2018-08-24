@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { CarouselContext } from './Carousel'
+import { CarouselContext } from '~/components/Carousel/Carousel'
 
 const Indicators = styled.div`
   position: absolute;
@@ -8,6 +8,7 @@ const Indicators = styled.div`
   left: 0;
   right: 0;
   text-align: center;
+  z-index: 20;
 `
 
 const Indicator = styled.button`

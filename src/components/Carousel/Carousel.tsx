@@ -50,6 +50,7 @@ export const CarouselContext = React.createContext<CarouselContextType>({
 
 const Wrapper = styled.div`
   position: relative;
+  overflow: hidden;
 `
 
 class Carousel extends React.Component<CarouselProps, CarouselState> {

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { CarouselContext, Direction } from './Carousel'
+import { CarouselContext, Direction } from '~/components/Carousel/Carousel'
 
 interface SlideProps {
   readonly delaying: boolean

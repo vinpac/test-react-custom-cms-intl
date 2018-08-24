@@ -87,8 +87,6 @@ class Collapse extends React.Component<CollapseProps, CollapseState> {
       }
     }
 
-    console.log(startState, nextState)
-
     this.setState(startState, () => {
       this.timeout = setTimeout(() => this.setState(nextState), timeout)
     })

@@ -9,7 +9,7 @@ import {
   CarouselIndicators,
   Carousel as RawCarousel,
   CarouselItem as RawCarouselItem,
-} from '.'
+} from '~/components/Carousel'
 
 const Carousel = styled<CarouselProps>(RawCarousel)`
   height: 500px;

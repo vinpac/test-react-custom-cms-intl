@@ -4,9 +4,9 @@
 */
 
 import { combineReducers } from 'redux'
-import user, { State as UserState } from './ducks/user'
-import channel, { ChannelReducerState } from './ducks/channel'
-import intl, { IntlReducerState } from './ducks/intl'
+import user, { State as UserState } from '~/redux/ducks/user'
+import channel, { ChannelReducerState } from '~/redux/ducks/channel'
+import intl, { IntlReducerState } from '~/redux/ducks/intl'
 
 export type RootState = {
   readonly user: UserState

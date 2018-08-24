@@ -1,5 +1,5 @@
 import { create } from 'react-test-renderer'
-import Page from '../pages/home'
+import Page from 'pages/home'
 import 'jest-styled-components'
 
 describe('Home', () => {

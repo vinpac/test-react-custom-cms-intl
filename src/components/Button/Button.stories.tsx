@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { withInfo } from '@storybook/addon-info'
-import Button from '.'
+import Button from '~/components/Button'
 const text = `
 A very important part of this example is the \`.babelrc\` file which configures the test
 environment to use \`babel-preset-env\` and configures it to transpile modules to commonjs).
