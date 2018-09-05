@@ -228,7 +228,7 @@ class SearchForm extends React.Component<
         }${focused ? 'focused' : ''}`}
       >
         <DropdownInputWrapper
-          innerRef={ref => {
+          ref={ref => {
             this.dropdown = ref as Dropdown
           }}
           open={focused}

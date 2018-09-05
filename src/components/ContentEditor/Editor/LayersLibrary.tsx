@@ -408,7 +408,7 @@ class LayersLibrary extends React.PureComponent<
         style={{ display: isOpen ? 'flex' : 'none' }}
       >
         <Input
-          innerRef={ref => {
+          ref={ref => {
             this.input = ref
           }}
           placeholder="Search layers"

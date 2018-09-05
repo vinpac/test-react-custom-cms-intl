@@ -66,7 +66,7 @@ class App extends NextApp<AppProps> {
             <ThemeProvider theme={{ colorPrimary: channel.theme.colorPrimary }}>
               <GlobalModals modals={globalModals}>
                 <GlobalProgressBar
-                  innerRef={ref => {
+                  ref={ref => {
                     this.progressBar = ref as ProgressBar
                   }}
                 />

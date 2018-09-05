@@ -118,7 +118,7 @@ class Modal extends React.Component<ModalProps, ModalState> {
           <Icon name="clear" iconSet="material" />
         </CloseButton>
         <Body
-          innerRef={ref => {
+          ref={ref => {
             this.body = ref
           }}
         >

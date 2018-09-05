@@ -42,7 +42,7 @@
     "redux-thunk": "^2.3.0",
     "showdown": "^1.8.6",
     "source-map-support": "^0.5.6",
-    "styled-components": "^3.4.5"
+    "styled-components": "^4.0.0-beta.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.8",
@@ -59,6 +59,7 @@
     "@types/react-redux": "^6.0.3",
     "@types/react-test-renderer": "^16.0.1",
     "@types/redux-logger": "^3.0.6",
+    "@types/styled-components": "^3.0.0",
     "autoprefixer": "^8.6.4",
     "awesome-typescript-loader": "^5.2.0",
     "babel-core": "^7.0.0-bridge.0",

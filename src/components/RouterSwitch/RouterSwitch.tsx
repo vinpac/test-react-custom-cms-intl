@@ -193,7 +193,7 @@ class RouterSwitch extends React.Component<
         >
           <Body
             key={location.path}
-            innerRef={ref => {
+            ref={ref => {
               this.body = ref
             }}
           >

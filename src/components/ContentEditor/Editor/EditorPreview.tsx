@@ -87,7 +87,7 @@ class EditorPreview extends React.PureComponent<
       <Preview className={className}>
         <Frame
           key={iframeKey}
-          innerRef={(iframe: HTMLIFrameElement | null) => {
+          ref={iframe => {
             this.iframe = iframe
           }}
           src="/render"
