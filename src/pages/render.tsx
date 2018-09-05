@@ -8,11 +8,15 @@ import { NotFoundPageError } from '~/lib/next/errors'
 import * as CMS from '~/lib/cms'
 import { loadData } from '~/components/ContentEditor/DataLoader'
 import { DataMap } from '~/components/ContentEditor/Renderer'
+import Meta from '~/components/Meta'
 
 interface HomeProps {
   slug: string
   loadedData: DataMap
-  json: { document: RenderableDocument }
+  json: {
+    meta?: { title?: string; description?: string; image?: string }
+    document: RenderableDocument
+  }
 }
 
 const Home: NextStatelessComponent<HomeProps> = ({
@@ -20,12 +24,15 @@ const Home: NextStatelessComponent<HomeProps> = ({
   loadedData,
   json,
 }) => (
-  <Renderer
-    key={slug}
-    schema={schema}
-    loadedData={loadedData}
-    document={json.document}
-  />
+  <>
+    {json.meta && <Meta {...json.meta} />}
+    <Renderer
+      key={slug}
+      schema={schema}
+      loadedData={loadedData}
+      document={json.document}
+    />
+  </>
 )
 
 Home.getInitialProps = async ({ query: { slug } }) => {

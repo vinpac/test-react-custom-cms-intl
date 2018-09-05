@@ -5,3 +5,6 @@ searchForm:
 disponibility:
   work: Recorrente
   job: Pontual
+meta:
+  title: Channel
+  description: Short channel description

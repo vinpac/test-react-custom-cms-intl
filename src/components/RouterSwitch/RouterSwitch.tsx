@@ -22,7 +22,7 @@ type TransitionType = 'fade-up'
 
 const Body = styled.div``
 const Container = styled.div`
-  transition: height 400ms ease-in-out;
+  transition: height 300ms ease-in-out;
 
   &.transitioning {
     overflow: hidden;
@@ -86,7 +86,7 @@ class RouterSwitch extends React.Component<
   body: HTMLDivElement
 
   static defaultProps = {
-    transitionTime: 400,
+    transitionTime: 300,
     className: undefined,
   }
   static getDerivedStateFromProps(

@@ -35,7 +35,6 @@ export default class Document extends NextDocument {
     return (
       <html>
         <Head>
-          <title>My page</title>
           <link
             rel="stylesheet"
             href={`/_static/${STATIC_DIST_DIRNAME}/_index.css`}
