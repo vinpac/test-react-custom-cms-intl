@@ -1,6 +1,10 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { CarouselItemType } from '~/components/Carousel/CarouselItem'
+import {
+  PropertyControls,
+  ControlType,
+} from '~/components/ContentEditor/models/controls'
 
 export interface Monitor {
   readonly id: string
@@ -83,6 +87,30 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
   static defaultProps = {
     transitionTime: 600,
     rotateEach: undefined,
+  }
+
+  static propertyControls: PropertyControls<CarouselProps> = {
+    rotateEach: {
+      type: ControlType.Number,
+      label: 'Transition',
+      placeholder: 'Tempo de loop',
+    },
+  }
+
+  static filterChildren = (kind: string) => {
+    if (kind === 'CarouselItem' || kind === 'CarouselIndicators') {
+      return true
+    }
+
+    return false
+  }
+
+  static filterParent = (kind: string) => {
+    if (kind !== 'Carousel') {
+      return true
+    }
+
+    return false
   }
 
   constructor(props) {

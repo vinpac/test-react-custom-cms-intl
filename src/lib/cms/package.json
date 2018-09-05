@@ -1,0 +1,4 @@
+{
+  "main": "index.server.ts",
+  "browser": "index.client.ts"
+}

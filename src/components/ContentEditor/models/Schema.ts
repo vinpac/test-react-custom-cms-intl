@@ -7,27 +7,34 @@ import {
   ModifiersMap,
   InputComponentsMap,
   InputComponent,
-  ComponentOptions,
+  ComponentDescription,
   Modifier,
-  ComponentDefinition,
   InputComponentType,
+  StringComponentType,
+  ComponentType,
 } from '~/components/ContentEditor/types'
-import { ComponentType } from 'react'
+import { getWrappedComponent } from '~/components/ContentEditor/Editor/utils'
 
-const TextComponentDefinition = {
-  component: ({ value }: { value: string }) => value,
-  propertyControls: {
-    value: {
-      type: ControlType.String,
-      label: 'Text',
-      placeholder: 'Text...',
-    },
+interface TextProps {
+  value: string
+}
+const Text: StringComponentType<TextProps> &
+  ComponentDescription<PropertyControls<TextProps>> = ({
+  value,
+}: {
+  value: string
+}) => value
+Text.propertyControls = {
+  value: {
+    type: ControlType.String,
+    label: 'Text',
+    placeholder: 'Text...',
   },
 }
 
-class Schema<C = PropertyControls<any>> {
+class Schema<Controls = PropertyControls<any>> {
   protected plainTypes: string[]
-  protected components: ComponentsMap<C>
+  protected components: ComponentsMap<Controls>
   protected modifiers: ModifiersMap
   protected inputComponents: InputComponentsMap
 
@@ -38,7 +45,7 @@ class Schema<C = PropertyControls<any>> {
     inputComponents,
   }: {
     plainTypes?: string[]
-    components: ComponentsMap<C>
+    components: ComponentsMap<Controls>
     modifiers?: ModifiersMap
     inputComponents?: InputComponentsMap
   }) {
@@ -53,19 +60,16 @@ class Schema<C = PropertyControls<any>> {
 
   getComponentKinds = (): string[] => Object.keys(this.components)
 
-  getComponent(kind: string): ComponentDefinition<C> | undefined {
-    const def = this.components[kind]
-
-    if (!def && kind === 'Text') {
-      // @ts-ignore
-      return TextComponentDefinition
-    }
-
-    return def
+  getComponent = (kind: string): ComponentType<any, Controls> | undefined => {
+    return this.components[kind]
   }
 
-  getReactComponent(kind: string): ComponentType | undefined {
-    return this.components[kind] ? this.components[kind].component : undefined
+  getComponentDescription(
+    kind: string,
+  ): ComponentType<any, Controls> | undefined {
+    return this.components[kind]
+      ? getWrappedComponent(this.components[kind])
+      : undefined
   }
 
   isValidPlainType(kind: string): boolean {
@@ -79,15 +83,8 @@ class Schema<C = PropertyControls<any>> {
   getInputControl = (kind: string): InputComponentType<any, any> | undefined =>
     this.inputComponents[kind]
 
-  addComponent(
-    kind: string,
-    component: React.ComponentType,
-    options?: ComponentOptions<C>,
-  ) {
-    this.components[kind] = {
-      ...options,
-      component,
-    }
+  addComponent(kind: string, component: ComponentType<any, Controls>) {
+    this.components[kind] = component
   }
 
   addInputComponent(kind: string, component: InputComponent<any, any>) {

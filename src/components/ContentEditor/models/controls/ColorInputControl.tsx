@@ -43,8 +43,9 @@ const Indicator = styled.div`
 `
 
 export const ColorControlType = '@@control/Color'
+export type ColorControlType = '@@control/Color'
 export interface ColorControl extends PropertyControl {
-  type: '@@control/Color'
+  type: ColorControlType
   placeholder?: string
 }
 

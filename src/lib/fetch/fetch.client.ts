@@ -1,9 +1,21 @@
 import isPlainObject from 'is-plain-object'
 import isoFetch from 'isomorphic-fetch'
 import queryString from 'query-string'
+import { API_URL } from '~/core/constants'
 
-export function fetch(rawURL, options) {
-  let url = rawURL
+export interface Options {
+  method: 'get' | 'post' | 'put' | 'delete' | 'patch'
+  query?: object
+  body?: FormData | object | string
+  headers?: object
+  channelId: string
+  session?: {
+    id: string
+  }
+}
+
+export function fetch(baseUri: string, options?: Options) {
+  let url = baseUri
 
   if (options) {
     if (isPlainObject(options.body)) {
@@ -29,8 +41,7 @@ export function fetch(rawURL, options) {
 
     if (options.session) {
       options.headers = options.headers || {}
-      options.headers['x-next-auth-token'] = options.session.id
-      options.headers['x-next-auth-secret'] = options.session.secret
+      options.headers['Authorization'] = `JWT '${options.session.id}'`
     }
   }
 
@@ -43,11 +54,16 @@ export function fetch(rawURL, options) {
   })
 }
 
-export function fetchJSON(url, options) {
+export function fetchJSON(url: string, options?: Options) {
   return fetch(url, options)
-    .then(response => (response.json ? response.json() : response))
+    .then(response => response.json())
     .catch(response => {
-      if (response.json) {
+      if (
+        response.headers &&
+        response.headers.get('content-type').indexOf('application/json') !==
+          -1 &&
+        response.json
+      ) {
         return response.json().then(json => {
           throw json
         })
@@ -56,3 +72,6 @@ export function fetchJSON(url, options) {
       throw response
     })
 }
+
+export const fetchAPI = (url: string, options?: Options) =>
+  fetchJSON(`${API_URL}${url}`, options)

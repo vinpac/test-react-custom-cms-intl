@@ -13,8 +13,9 @@ interface BooleanInputControlProps {
 }
 
 export const BooleanControlType = '@@control/Boolean'
+export type BooleanControlType = '@@control/Boolean'
 export interface BooleanControl extends PropertyControl {
-  type: '@@control/Boolean'
+  type: BooleanControlType
   disabled?: string
   enabled?: string
 }

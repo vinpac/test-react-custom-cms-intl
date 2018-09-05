@@ -1,6 +1,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { CarouselContext, Direction } from '~/components/Carousel/Carousel'
+import { ComponentDescription } from '~/components/ContentEditor/types'
+import { PropertyControls } from '~/components/ContentEditor/models/controls'
 
 interface SlideProps {
   readonly delaying: boolean
@@ -99,7 +101,8 @@ export interface CarouselItemType extends React.SFC<CarouselItemProps> {
   isCarouselItem?: true
 }
 
-const CarouselItemWrapper: CarouselItemType = ({
+const CarouselItemWrapper: CarouselItemType &
+  ComponentDescription<PropertyControls<CarouselItemProps>> = ({
   id,
   style,
   children,
@@ -124,5 +127,12 @@ const CarouselItemWrapper: CarouselItemType = ({
 )
 
 CarouselItemWrapper.isCarouselItem = true
+CarouselItemWrapper.filterParent = (kind: string) => {
+  if (kind === 'Carousel') {
+    return true
+  }
+
+  return false
+}
 
 export default CarouselItemWrapper

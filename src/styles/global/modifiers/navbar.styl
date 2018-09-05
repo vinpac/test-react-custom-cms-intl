@@ -10,37 +10,38 @@
     &:focus
       color: white
 
-  .navbar-nav
-    .nav-link
-      color: rgba(white, .7)
+.navbar-dark .navbar-nav,
+.nav-dark
+  .nav-link
+    color: rgba(white, .8)
 
-      &:hover,
-      &:focus
-        color: rgba(white, .8)
+    &:hover,
+    &:focus
+      color: rgba(white, .9)
 
-      &.disabled
-        color: rgba(white, .25)
+    &.disabled
+      color: rgba(white, .25)
 
-    .show > .nav-link,
-    .active > .nav-link,
-    .nav-link.show,
-    .nav-link.active
+  .show > .nav-link,
+  .active > .nav-link,
+  .nav-link.show,
+  .nav-link.active
+    color: white
+
+.navbar-toggler
+  background: none
+  color: rgba(white, .5)
+  border-color: rgba(white, .1)
+
+.navbar-text
+  color: rgba(white, .5)
+
+  a
+    color: white
+
+    &:hover,
+    &:focus
       color: white
-
-  .navbar-toggler
-    background: none
-    color: rgba(white, .5)
-    border-color: rgba(white, .1)
-
-  .navbar-text
-    color: rgba(white, .5)
-
-    a
-      color: white
-
-      &:hover,
-      &:focus
-        color: white
 
 
 .navbar-light
@@ -53,11 +54,11 @@
 
   .navbar-nav
     .nav-link
-      color: rgba(black, .5)
+      color: rgba(black, .6)
 
       &:hover,
       &:focus
-        color: rgba(black, .7)
+        color: rgba(black, .8)
 
       &.disabled
         color: rgba(black, .3)
@@ -70,7 +71,7 @@
 
   .navbar-toggler
     color: rgba(black, .5)
-    border-color: rgba(black, .1)
+    border-color: rgba(black, .25)
 
   .navbar-text
     color: rgba(black, .5)

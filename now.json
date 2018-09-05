@@ -1,0 +1,24 @@
+{
+  "public": true,
+  "type": "docker",
+  "files": [
+    "src",
+    "public",
+    "next.config.js",
+    "gulpfile.js",
+    "package.json",
+    "gulpfile.js",
+    "next.config.js",
+    "yarn.lock",
+    "tsconfig.json",
+    ".babelrc",
+    "tsconfig.server.json",
+    "nodemon.json",
+    ".dockerignore",
+    "docker-compose.yml",
+    "Dockerfile"
+  ],
+  "features": {
+    "cloud": "v2"
+  }
+}

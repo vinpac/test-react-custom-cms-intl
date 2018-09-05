@@ -42,7 +42,7 @@ class EditorSidebarLayersSection extends React.Component<
 
   handleLayerFocus = (layerPath: string): void => {
     const { value, dispatchChange } = this.props
-    if (value.selection && value.selection.layerPath !== layerPath) {
+    if (!value.selection || value.selection.layerPath !== layerPath) {
       dispatchChange(value.change(change => change.select(layerPath)))
     }
   }

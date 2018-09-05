@@ -236,7 +236,7 @@ class Layer extends React.PureComponent<LayerProps, LayerState> {
     return (
       <>
         <Container
-          innerRef={container => {
+          innerRef={(container: HTMLDivElement | null) => {
             this.container = container
           }}
           type="button"
@@ -271,7 +271,7 @@ class Layer extends React.PureComponent<LayerProps, LayerState> {
             {showNameInput ? (
               <RenameForm onSubmit={this.submitRename}>
                 <Input
-                  innerRef={input => {
+                  innerRef={(input: HTMLInputElement | null) => {
                     this.nameInput = input
                   }}
                   type="text"

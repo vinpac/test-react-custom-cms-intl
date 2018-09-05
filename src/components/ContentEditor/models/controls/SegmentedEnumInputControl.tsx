@@ -71,8 +71,9 @@ export const ButtonGroup = styled.div.attrs({ className: 'btn-group w-100' })`
 
 type Option = { label: string; value: string }
 export const SegmentedEnumControlType = '@@control/SegmentedEnum'
+export type SegmentedEnumControlType = '@@control/SegmentedEnum'
 export interface SegmentedEnumControl extends PropertyControl {
-  type: '@@control/SegmentedEnum'
+  type: SegmentedEnumControlType
   options: Option[]
 }
 

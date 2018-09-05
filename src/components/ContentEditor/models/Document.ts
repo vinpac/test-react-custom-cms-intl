@@ -7,10 +7,7 @@ import {
   RenderableDocument,
 } from '~/components/ContentEditor/types'
 import Schema from '~/components/ContentEditor/models/Schema'
-import {
-  getWrappedComponent,
-  generateRandomId,
-} from '~/components/ContentEditor/Editor/utils'
+import { generateRandomId } from '~/components/ContentEditor/Editor/utils'
 
 interface ImmutableMap<T, R = T> {
   get<K extends keyof T>(name: K): T[K]
@@ -55,9 +52,7 @@ export function createLayer(node: Node, schema: Schema): LayerType {
     }
   }
 
-  const component = schema.getReactComponent(node.kind)
-    ? getWrappedComponent(schema.getReactComponent(node.kind)!)
-    : undefined
+  const component = schema.getComponentDescription(node.kind)
 
   return {
     id: node.id || generateRandomId(),

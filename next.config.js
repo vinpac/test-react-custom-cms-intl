@@ -1,7 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 const withTypescript = require('@zeit/next-typescript')
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 // Utils
 const { assign } = Object
@@ -20,10 +19,12 @@ module.exports = withTypescript({
   },
   publicRuntimeConfig: {
     apiURL: process.env.API_URL || 'http://localhost:8000',
-    appURL: process.env.API_URL || 'http://localhost:3000',
+    appURL: process.env.APP_URL || 'http://localhost:3000',
   },
   useFileSystemPublicRoutes: false,
   webpack(config, { isServer, dev }) {
+    const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+
     // Do not run type checking twice
     if (isServer) {
       config.plugins.push(

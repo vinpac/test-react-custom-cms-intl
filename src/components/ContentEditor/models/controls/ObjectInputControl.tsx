@@ -11,8 +11,9 @@ interface ObjectInputControlProps {
 }
 
 export const ObjectControlType = '@@control/Object'
+export type ObjectControlType = '@@control/Object'
 export interface ObjectControl<P> extends PropertyControl {
-  type: '@@control/Object'
+  type: ObjectControlType
   controls: P
 }
 

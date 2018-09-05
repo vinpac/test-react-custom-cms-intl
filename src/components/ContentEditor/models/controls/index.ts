@@ -22,9 +22,15 @@ import ObjectInputControl, {
   ObjectControlType,
   ObjectControl,
 } from './ObjectInputControl'
-import { PropertyControl } from '~/components/ContentEditor/types'
 
-export const ControlType = {
+export const ControlType: {
+  Boolean: BooleanControlType
+  String: StringControlType
+  Number: NumberControlType
+  Object: ObjectControlType
+  Color: ColorControlType
+  SegmentedEnum: SegmentedEnumControlType
+} = {
   Boolean: BooleanControlType,
   String: StringControlType,
   Number: NumberControlType,
@@ -33,17 +39,17 @@ export const ControlType = {
   SegmentedEnum: SegmentedEnumControlType,
 }
 
-export type PropertyControls<Props> = {
-  [K in keyof Props]?: Props[K] extends boolean
-    ? BooleanControl
-    : Props[K] extends string
-      ? StringControl | ColorControl | SegmentedEnumControl
-      : Props[K] extends number
-        ? NumberControl
-        : Props[K] extends object
-          ? ObjectControl<PropertyControls<Props>>
-          : PropertyControl
+export type PropertyControls<P = any> = {
+  [K in keyof P]?: ControlDescription<Partial<P>>
 }
+
+export type ControlDescription<Props> =
+  | StringControl
+  | BooleanControl
+  | ColorControl
+  | SegmentedEnumControl
+  | NumberControl
+  | ObjectControl<Props>
 
 export default {
   [ControlType.Boolean]: BooleanInputControl,

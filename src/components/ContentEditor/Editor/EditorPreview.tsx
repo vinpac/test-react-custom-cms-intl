@@ -35,7 +35,7 @@ class EditorPreview extends React.PureComponent<
   EditorPreviewProps,
   EditorPreviewState
 > {
-  iframe: HTMLIFrameElement
+  iframe: HTMLIFrameElement | null
 
   static defaultProps = {
     className: undefined,
@@ -87,7 +87,7 @@ class EditorPreview extends React.PureComponent<
       <Preview className={className}>
         <Frame
           key={iframeKey}
-          innerRef={iframe => {
+          innerRef={(iframe: HTMLIFrameElement | null) => {
             this.iframe = iframe
           }}
           src="/render"

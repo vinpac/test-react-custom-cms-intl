@@ -32,8 +32,9 @@ const Input = styled.input.attrs({ className: 'input' })`
 `
 
 export const StringControlType = '@@control/String'
+export type StringControlType = '@@control/String'
 export interface StringControl extends PropertyControl {
-  type: '@@control/String'
+  type: StringControlType
   placeholder?: string
   format?: string
   addon?: { type: string; name: string; set?: 'material' }

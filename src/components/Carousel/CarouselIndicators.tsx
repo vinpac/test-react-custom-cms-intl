@@ -1,6 +1,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { CarouselContext } from '~/components/Carousel/Carousel'
+import { ComponentDescription } from '~/components/ContentEditor/types'
+import { PropertyControls } from '~/components/ContentEditor/models/controls'
 
 const Indicators = styled.div`
   position: absolute;
@@ -38,7 +40,8 @@ export interface CarouselIndicatorsProps {
   readonly className?: string
 }
 
-const CarouselIndicators: React.SFC<CarouselIndicatorsProps> = ({
+const CarouselIndicators: React.SFC<CarouselIndicatorsProps> &
+  ComponentDescription<PropertyControls<CarouselIndicatorsProps>> = ({
   className,
   itemClassName,
 }) => (
@@ -65,6 +68,13 @@ const CarouselIndicators: React.SFC<CarouselIndicatorsProps> = ({
 
 CarouselIndicators.defaultProps = {
   itemClassName: '',
+}
+CarouselIndicators.filterParent = (kind: string) => {
+  if (kind === 'Carousel') {
+    return true
+  }
+
+  return false
 }
 
 export default CarouselIndicators

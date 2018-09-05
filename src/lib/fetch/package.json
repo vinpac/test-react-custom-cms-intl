@@ -1,4 +1,4 @@
 {
-  "main": "fetch.server.js",
-  "browser": "fetch.client.js"
+  "main": "./fetch.server.ts",
+  "browser": "./fetch.client.ts"
 }

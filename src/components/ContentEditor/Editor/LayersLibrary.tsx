@@ -209,7 +209,7 @@ const BreadcrumbsWrapper = styled.div`
   position: relative;
 `
 
-const SubmitButton = styled.button.attrs({ className: 'btn' })`
+const SubmitButton = styled.button`
   background: #555;
   font-size: 12px;
   padding: 4px 8px;
@@ -287,10 +287,7 @@ class LayersLibrary extends React.PureComponent<
       }
 
       if (def && def.filterParent) {
-        return def.filterParent(
-          parentKind,
-          parentComponent ? parentComponent.component : null,
-        )
+        return def.filterParent(parentKind, parentComponent || null)
       }
 
       return true
@@ -459,7 +456,7 @@ class LayersLibrary extends React.PureComponent<
                 <BreadcrumbsWrapper>
                   {this.renderBreadcrumbs()}
                 </BreadcrumbsWrapper>
-                <SubmitButton className="ml-2">Add Layer</SubmitButton>
+                <SubmitButton className="btn ml-2">Add Layer</SubmitButton>
               </InfoFooter>
             </Info>
           ) : (

@@ -59,25 +59,41 @@ export interface PropertyControl {
   label: string
 }
 
-export interface ComponentOptions<C> {
+interface GetInitialPropsContext {
+  query: object
+}
+
+export interface ComponentDescription<C> {
   name?: string
   description?: string
   layerIcon?: string
   propertyControls?: C
+  getInitialProps?: (context: GetInitialPropsContext) => any
   layerFocusedIcon?: string
   filterChildren?: (kind: string) => boolean
   filterParent?: (
     kind: string,
-    component: React.ComponentType<any> | null,
+    component: ComponentType<any, any> | null,
   ) => boolean
 }
 
-export interface ComponentDefinition<C> extends ComponentOptions<C> {
-  component: React.ComponentType<any>
+export type Component<Props, State, Controls> = React.Component<Props, State> &
+  ComponentDescription<Controls>
+export type StatelessComponent<Props, Controls> = React.StatelessComponent<
+  Props
+> &
+  ComponentDescription<Controls>
+export interface StringComponentType<P> {
+  (props: P): string
+  defaultProps?: Partial<P>
 }
+export type ComponentType<Props, Controls> = (
+  | React.ComponentType<Props>
+  | StringComponentType<Props>) &
+  ComponentDescription<Controls>
 
-export interface ComponentsMap<C> {
-  [kind: string]: ComponentDefinition<C>
+export interface ComponentsMap<Controls> {
+  [kind: string]: ComponentType<any, Controls>
 }
 
 export interface InputComponentProps<Value> {

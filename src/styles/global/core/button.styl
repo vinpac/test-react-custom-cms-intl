@@ -1,3 +1,5 @@
+@import '../../variables'
+
 .btn
   cursor: pointer
   display: inline-block
@@ -86,7 +88,8 @@ fieldset[disabled] a.btn
   display: block !important
   width: 100% !important
 
-.btn-plain
+.btn-plain,
+.btn-plain-text
   cursor: pointer
   padding: 0
   border: 0
@@ -94,3 +97,10 @@ fieldset[disabled] a.btn
 
   &:focus
     outline: none
+
+.btn-plain-text
+  font-weight: normal
+  line-height: $line-height-base
+
+  &:focus
+    box-shadow: none

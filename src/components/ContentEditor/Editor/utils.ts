@@ -1,4 +1,6 @@
-type WrapperComponent = React.ComponentType & {
+import { StringComponentType } from '~/components/ContentEditor/types'
+
+type WrapperComponent = (React.ComponentType | StringComponentType<any>) & {
   WrappedComponent?: WrapperComponent
 }
 
@@ -10,7 +12,7 @@ export function generateRandomId(): string {
 
 export const getWrappedComponent = (
   component: WrapperComponent,
-): React.ComponentType => {
+): React.ComponentType | StringComponentType<any> => {
   if (component.WrappedComponent!) {
     return getWrappedComponent(component.WrappedComponent!)
   }

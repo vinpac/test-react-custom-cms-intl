@@ -37,8 +37,9 @@ const Input = styled.input.attrs({ className: 'input' })`
 `
 
 export const NumberControlType = '@@control/Number'
+export type NumberControlType = '@@control/Number'
 export interface NumberControl extends PropertyControl {
-  type: '@@control/Number'
+  type: NumberControlType
   placeholder?: string
 }
 

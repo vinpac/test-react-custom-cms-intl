@@ -35,7 +35,7 @@ class EditorSidebarLayerPropertiesSection extends React.Component<
     const { selection } = editorValue
     const selectedLayer: ImmutableLayerType | undefined =
       selection && editorValue.get(selection.layerPath)
-    const componentDef =
+    const component =
       selectedLayer &&
       editorValue.schema.getComponent(selectedLayer.get('kind'))
 
@@ -45,11 +45,12 @@ class EditorSidebarLayerPropertiesSection extends React.Component<
         className={className}
         style={style}
       >
-        {componentDef &&
-          componentDef.propertyControls && (
+        {component &&
+          component.propertyControls && (
             <PropertiesForm
+              key={selectedLayer!.get('id')}
               schema={editorValue.schema}
-              controls={componentDef.propertyControls}
+              controls={component.propertyControls}
               value={(selectedLayer!.get('props') as Map<any, any>).toJS()}
               onChange={nextProps =>
                 selection

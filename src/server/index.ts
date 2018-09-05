@@ -4,8 +4,9 @@ import * as express from 'express'
 import * as next from 'next'
 import * as bodyParser from 'body-parser'
 import { dev, STATIC_DIST_DIRNAME } from '~/core/constants'
-import setupChannel from './channel/setup'
+import setupChannel, { ChannelRequest } from './channel/setup'
 import setupIntl from './intl/setup'
+import setupCMS from './cms/setup'
 
 const port = process.env.PORT || 3000
 const server = express()
@@ -26,9 +27,16 @@ server.use(
         },
   ),
 )
-server.use(express.static(resolve('public')))
+server.use(
+  express.static(resolve('public'), {
+    maxAge: 31536000000,
+    immutable: true,
+  }),
+)
+
 setupChannel(server)
 setupIntl(server)
+setupCMS(server)
 
 const listen = () =>
   server.listen(port, () => console.info(`> Ready on http://localhost:${port}`))
@@ -45,5 +53,10 @@ if (!process.env.DISABLE_NEXT) {
 
   app.prepare().then(listen)
 } else {
+  server.get('/', (req: ChannelRequest, res) =>
+    res.json({
+      channel: req.channel,
+    }),
+  )
   listen()
 }

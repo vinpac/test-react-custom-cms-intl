@@ -1,10 +1,17 @@
 import * as React from 'react'
-import { Node, RenderableDocument } from '~/components/ContentEditor/types'
+import {
+  Node,
+  RenderableDocument,
+  ComponentType,
+} from '~/components/ContentEditor/types'
 import Schema from '~/components/ContentEditor/models/Schema'
+
+export type DataMap = { [nodeId: string]: object }
 
 const renderLayer = (
   node: Node,
   schema: Schema,
+  dataMap?: DataMap,
 ): React.ReactElement<any> | null | string => {
   if (typeof node === 'string') {
     return node
@@ -15,14 +22,23 @@ const renderLayer = (
   }
 
   const Component:
-    | React.ComponentType<any>
+    | ComponentType<any, any>
     | string
     | undefined = schema.isValidPlainType(node.kind)
     ? node.kind
-    : schema.getReactComponent(node.kind)
+    : schema.getComponent(node.kind)
 
   if (!Component) {
     if (node.kind === 'Text' && node.props) {
+      const { style, kind } = node.props
+      if (kind) {
+        return (
+          <node.props.kind key={node.id} style={style}>
+            {node.props.value}
+          </node.props.kind>
+        )
+      }
+
       return node.props.value
     }
 
@@ -34,6 +50,10 @@ const renderLayer = (
   }
 
   let props: object = node.props || {}
+
+  if (dataMap && dataMap[node.id]) {
+    Object.assign(props, dataMap[node.id])
+  }
 
   if (node.modifiers) {
     node.modifiers.forEach(modifierDefinition => {
@@ -51,6 +71,7 @@ const renderLayer = (
   }
 
   return (
+    // @ts-ignore
     <Component key={node.id} {...props}>
       {node.nodes &&
         node.nodes.map(childNode => renderLayer(childNode, schema))}
@@ -59,6 +80,7 @@ const renderLayer = (
 }
 
 interface RendererProps {
+  loadedData?: DataMap
   document: RenderableDocument
   schema: Schema
 }
@@ -66,8 +88,9 @@ interface RendererProps {
 const Renderer: React.SFC<RendererProps> = ({
   document: { nodes },
   schema,
+  loadedData,
 }) => {
-  return <>{nodes.map(node => renderLayer(node, schema))}</>
+  return <>{nodes.map(node => renderLayer(node, schema, loadedData))}</>
 }
 
 export default Renderer

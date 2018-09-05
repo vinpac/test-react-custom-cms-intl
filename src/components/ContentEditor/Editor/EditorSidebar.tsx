@@ -32,7 +32,7 @@ const Body = styled.div`
   left: 48px;
 `
 
-const SidebarButton = styled.button.attrs({ className: 'btn' })`
+const SidebarButton = styled.button`
   background: none;
   font-size: 28px;
   padding: 4px 9px;
@@ -84,13 +84,13 @@ class EditorSidebar extends React.Component<
     return (
       <Container className={className}>
         <Sidebar>
-          <SidebarButton className="active">
+          <SidebarButton className="btn active">
             <img src="/logo-white.svg" alt="Atados" width="28px" />
           </SidebarButton>
-          <SidebarButton className="active">
+          <SidebarButton className="btn active">
             <Icon name="menu" iconSet="material" />
           </SidebarButton>
-          <SidebarButton>
+          <SidebarButton className="btn">
             <Icon name="dashboard" iconSet="material" />
           </SidebarButton>
         </Sidebar>

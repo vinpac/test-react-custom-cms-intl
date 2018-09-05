@@ -5,13 +5,18 @@
         "id": "3",
         "name": "Toolbar",
         "kind": "Toolbar",
+        "props": {
+          "searchFormEnabled": true,
+          "floating": true,
+          "navbarTheme": "light"
+        },
         "nodes": [
           {
             "id": "qw123",
             "kind": "ToolbarNav",
             "nodes": [
               {
-                "id": "qwe",
+                "id": "qwe14",
                 "kind": "InternalLink",
                 "props": {
                   "href": "/vagas"
@@ -33,13 +38,27 @@
                 "props": {
                   "href": "/sou-uma-ong"
                 },
-                "nodes": ["Sou uma ONG"]
+                "nodes": ["ONG"]
+              },
+              {
+                "id": "lmck13",
+                "kind": "ToolbarTimeline"
+              },
+              {
+                "id": "123ada",
+                "kind": "ToolbarMessages",
+                "props": {
+                  "href": "/sou-uma-ong"
+                }
               },
               {
                 "id": "1241",
                 "kind": "ModalLink",
                 "props": {
-                  "modalId": "Authentication"
+                  "modalId": "Authentication",
+                  "modalProps": {
+                    "defaultPath": "/register"
+                  }
                 },
                 "nodes": ["Cadastrar-se"]
               },
@@ -62,45 +81,11 @@
         "props": {
           "rotateEach": 5000,
           "style": {
-            "height": 400
+            "height": 600
           },
-          "defaultItemId": "1"
+          "defaultItemId": "2"
         },
         "nodes": [
-          {
-            "id": "12312",
-            "name": "Indicators",
-            "kind": "CarouselIndicators"
-          },
-          {
-            "id": "10",
-            "name": "Item 1",
-            "kind": "CarouselItem",
-            "modifiers": [
-              {
-                "kind": "Padding",
-                "value": {
-                  "length": "5"
-                }
-              }
-            ],
-            "props": {
-              "id": "1",
-              "style": {
-                "backgroundColor": "#900"
-              }
-            },
-            "nodes": [
-              {
-                "id": "15",
-                "name": "Text",
-                "kind": "Markdown",
-                "props": {
-                  "value": "# Title here\n##Lorem ipsum"
-                }
-              }
-            ]
-          },
           {
             "id": "qwe",
             "name": "Item 2",
@@ -108,18 +93,54 @@
             "props": {
               "id": "2",
               "style": {
-                "backgroundColor": "#333",
-                "backgroundImage": "url('https://78.media.tumblr.com/463fef463aa6ece6d04e29f297e15c53/tumblr_pd7ghjfeLd1rtx80xo1_540.jpg')"
+                "backgroundColor": "#b8d3e6",
+                "backgroundImage": "url('https://cfl.dropboxstatic.com/static/images/business/homepage/background--homepage@2x-vfla3aC_v.jpg')",
+                "backgroundSize": "contain",
+                "backgroundPosition": "center right",
+                "backgroundRepeat": "no-repeat"
               }
             },
             "nodes": [
               {
-                "id": "151",
-                "name": "Text",
-                "kind": "Markdown",
+                "id": "qwe2",
+                "kind": "Container",
                 "props": {
-                  "value": "Lorem ipsum"
-                }
+                  "className": "py-10"
+                },
+                "nodes": [
+                  {
+                    "id": "151",
+                    "name": "Text",
+                    "kind": "Text",
+                    "props": {
+                      "value": "Trabalhe melhor,\n em segurança,\n em grupo.",
+                      "kind": "h1",
+                      "style": {
+                        "maxWidth": "440px",
+                        "fontSize": 48,
+                        "fontWeight": 300,
+                        "color": "#47525d",
+                        "marginBottom": "30px"
+                      }
+                    }
+                  },
+                  {
+                    "id": "152",
+                    "name": "Text",
+                    "kind": "Text",
+                    "props": {
+                      "value": "O Dropbox Business simplifica seu trabalho, fornecendo um lugar central para o acesso e o compartilhamento de arquivos.",
+                      "kind": "h2",
+                      "style": {
+                        "maxWidth": "420px",
+                        "lineHeight": "1.5",
+                        "fontSize": 21,
+                        "fontWeight": "300",
+                        "color": "#47525d"
+                      }
+                    }
+                  }
+                ]
               }
             ]
           }
@@ -140,6 +161,11 @@
           }
         ],
         "nodes": [
+          {
+            "id": "alsdm",
+            "name": "Texto",
+            "kind": "CausesSection"
+          },
           {
             "id": "114",
             "name": "Texto",

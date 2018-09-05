@@ -65,9 +65,7 @@ class Editor extends React.Component<EditorProps, EditorState> {
     super(props)
 
     this.state = {
-      value: Value.fromJS(schema, props.defaultValue).change(change =>
-        change.select('1.1'),
-      ),
+      value: Value.fromJS(schema, props.defaultValue),
     }
   }
 

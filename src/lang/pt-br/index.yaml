@@ -1,4 +1,7 @@
 app:
   name: Channel
 searchForm:
-  placeholder: 'Buscar vagas de voluntariado por causa, habilidade, endereço…'
+  placeholder: Busque vagas de voluntariado ou ONGs
+disponibility:
+  work: Recorrente
+  job: Pontual

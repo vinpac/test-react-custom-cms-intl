@@ -1,8 +1,4 @@
-const Authentication: React.SFC<{ onClose: () => void }> = ({ onClose }) => (
-  <div>
-    <button onClick={onClose}>Close</button>
-  </div>
-)
+import Authentication from '~/components/Authentication'
 
 export default {
   Authentication,

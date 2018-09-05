@@ -10,7 +10,10 @@ export const GlobalModalsContext: React.Context<
 interface GlobalModalsProps {
   readonly className?: string
   readonly modals: {
-    [modalId: string]: React.ComponentType<{ onClose: Function }>
+    [modalId: string]: React.ComponentType<{
+      defaultOpen: boolean
+      onClose: Function
+    }>
   }
 }
 
@@ -79,6 +82,7 @@ class GlobalModals extends React.Component<
                 key={modal.id}
                 {...modal.props}
                 onClose={() => this.handleModalClose(modal.id)}
+                defaultOpen
               />
             )
           })}
