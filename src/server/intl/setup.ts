@@ -127,7 +127,9 @@ export interface IntlRequest extends Request {
 export default (server: Express) => {
   server.use((req: IntlRequest, _, next) => {
     const accept = accepts(req)
-    const locale: string = accept.language(languages)
+    const acceptLanguage = accept.language(languages)
+    const locale: string =
+      typeof acceptLanguage === 'string' ? acceptLanguage : 'pt-br'
 
     req.locale = locale
     req.localeDataScript = getLocaleDataScript(locale)
